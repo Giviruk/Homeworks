@@ -75,7 +75,6 @@ namespace Homework10.Tests
         [InlineData("10*(5+5)")]
         [InlineData("100/20/5*88")]
         [InlineData("((23-3)+(22+8))/(12+8)")]
-        [InlineData("(123*12*11")]
         [InlineData("(12-20)/(13+11)*(100-12)/(22-21)")]
         public async Task Program_CacheValues_SecondResIsFaster(string expression)
         {
