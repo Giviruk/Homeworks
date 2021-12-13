@@ -38,7 +38,7 @@ namespace Homework8.Controllers
         public IActionResult Divide(double arg1, double arg2)
         {
             var result = arg2 == 0
-                ? "Divide by zero exception"
+                ? "DivideByZeroException"
                 : calculator.Calculate(arg1, Operation.Divide, arg2).ToString(CultureInfo.InvariantCulture);
             return View("Calculate", new Calculation(result));
         }
