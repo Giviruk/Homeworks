@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -30,7 +31,8 @@ namespace Homework8.Tests
 		{
 			var response =
 				await client.GetAsync($"http://localhost:5000/Calculator/{operation}?arg1={v1}&arg2={v2}");
-			var result = await response.Content.ReadAsStringAsync();
+			var content = await response.Content.ReadAsStringAsync();
+			var result = Regex.Match(content, @"<span>([\w.]+)</span>").Groups[1].Value;
 			Assert.Equal(expected, result);
 		}
 		
@@ -52,8 +54,9 @@ namespace Homework8.Tests
 		{
 			var response =
 				await client.GetAsync($"http://localhost:5000/Calculator/Divide?arg1=10&arg2=0");
-			var result = await response.Content.ReadAsStringAsync();
-			Assert.Equal("Divide by zero exception", result);
+			var content = await response.Content.ReadAsStringAsync();
+			var result = Regex.Match(content, @"<span>([\w.]+)</span>").Groups[1].Value;
+			Assert.Equal("DivideByZeroException", result);
 		}
 	}
 }
