@@ -1,26 +1,21 @@
-using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Homework10.Models;
+using Homework13.WebCalculator;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Homework10.Tests
+namespace Homework13.Tests
 {
     public class HostBuilder : WebApplicationFactory<Startup>
     {
         protected override IHostBuilder CreateHostBuilder()
             => Host
                 .CreateDefaultBuilder()
-                .ConfigureServices(x =>
-                    x.AddDbContext<ApplicationContext>(options => options.UseInMemoryDatabase("app")))
                 .ConfigureWebHostDefaults(a => a
                     .UseStartup<Startup>()
                     .UseTestServer());
@@ -40,7 +35,7 @@ namespace Homework10.Tests
         private async Task<string> GetResultAsync(string expression)
         {
             var response =
-                await client.GetAsync($"http://localhost:5000/Calculator/Calculate?expression={expression}");
+                await client.GetAsync($"http://localhost:5000/CalculatorCache/Calculate?expression={expression}");
             return await response.Content.ReadAsStringAsync();
         }
 
