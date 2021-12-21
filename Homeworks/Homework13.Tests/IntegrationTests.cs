@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Hosting;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Homework13.Tests
 {
@@ -23,33 +22,19 @@ namespace Homework13.Tests
 
     public class ProgramTests : IClassFixture<HostBuilder>
     {
-        private readonly ITestOutputHelper testOutputHelper;
         private readonly HttpClient client;
-
-        public ProgramTests(HostBuilder fixture, ITestOutputHelper testOutputHelper)
+        private readonly WebTestHelper testHelper;
+        public ProgramTests(HostBuilder fixture)
         {
-            this.testOutputHelper = testOutputHelper;
             client = fixture.CreateClient();
-        }
-
-        private async Task<string> GetResultAsync(string expression)
-        {
-            var response =
-                await client.GetAsync($"http://localhost:5000/CalculatorCache/Calculate?expression={expression}");
-            return await response.Content.ReadAsStringAsync();
-        }
-
-        private async Task CheckResultAsync(string expression, string expected)
-        {
-            var result = await GetResultAsync(expression);
-            Assert.Equal(expected, result);
+            testHelper = new WebTestHelper(client);
         }
 
         private async Task<long> MeasureTimeAsync(string expression)
         {
             var st = new Stopwatch();
             st.Start();
-            await GetResultAsync(expression);
+            await testHelper.GetResultAsync(expression);
             st.Stop();
             return st.ElapsedMilliseconds;
         }
@@ -61,7 +46,7 @@ namespace Homework13.Tests
         [InlineData("1*2*3*4*5", "120")]
         public async Task Program_CorrectValues_CorrectResultReturned(string expression, string expected)
         {
-            await CheckResultAsync(expression, expected);
+            await testHelper.CheckResultAsync(expression, expected);
         }
     }
 }
