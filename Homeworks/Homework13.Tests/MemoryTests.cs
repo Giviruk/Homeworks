@@ -19,7 +19,7 @@ namespace Homework13.Tests
         
         [Theory]
         [InlineData("+")]
-        [DotMemoryUnit(CollectAllocations = true)]
+        [DotMemoryUnit(FailIfRunWithoutSupport = false,CollectAllocations = true)]
         public void TestMemoryAsync(string operation)
         {
             var memoryPoint = dotMemory.Check();
