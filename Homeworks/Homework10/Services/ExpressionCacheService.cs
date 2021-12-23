@@ -21,7 +21,6 @@ namespace Homework10.Services
 
         public CalculatorExpression Get(string expression)
         {
-            Thread.Sleep(1000);
             return context.Expressions?.FirstOrDefault(x => x.Input == expression);
         }
     }

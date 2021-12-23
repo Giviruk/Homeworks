@@ -19,7 +19,6 @@ namespace Homework10.Services
         {
             var leftNodeTask = Task.Run(() => (decimal)((ConstantExpression)Visit(node.Left)).Value);
             var rightNodeTask = Task.Run(() => (decimal)((ConstantExpression)Visit(node.Right)).Value);
-            Thread.Sleep(1000);
             Task.WhenAll(leftNodeTask, rightNodeTask);
             var leftNode = leftNodeTask.Result;
             var rightNode = rightNodeTask.Result;
