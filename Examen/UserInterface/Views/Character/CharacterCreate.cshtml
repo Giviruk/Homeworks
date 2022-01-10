@@ -1,0 +1,14 @@
+﻿@model UserInterface.Models.CreateCharacterViewModel
+
+@{
+    ViewBag.Title = "Character";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("CharacterCreate","Character",FormMethod.Post))
+{
+    @Html.EditorForModel()
+    <input type="submit" class="mt-2" value="Создать персонажа"/>
+}
+
+

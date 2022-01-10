@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model GameViewModel
+
+<div class="d-flex justify-content-between">
+    <div class="d-flex flex-md-row flex-column">
+        <div class="mr-0 mr-md-5 mb-3 mb-md-0">
+            <h1 class="text-info">your character</h1>
+            @Html.EditorFor(x => x.CharacterViewModel,new { htmlAttributes = new { @readonly="readonly" }})
+        </div>
+        <div>
+            <div class="mr-0 mr-md-5 mb-3 mb-md-0 justify-content-lg-end">
+                <h1 class="text-danger">monster</h1>
+                @Html.EditorFor(x => x.MonsterViewModel,new { htmlAttributes = new { @readonly="readonly" }})
+            </div>
+        </div>
+    </div>
+</div>

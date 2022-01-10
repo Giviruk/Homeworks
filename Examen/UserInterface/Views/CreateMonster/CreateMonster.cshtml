@@ -1,0 +1,11 @@
+﻿@model UserInterface.Models.CharacterViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "_Layout";
+}
+<h1 class="text-center text-info">Your character</h1>
+@using (Html.BeginForm("CreateMonster","CreateMonster",FormMethod.Post))
+{
+    @Html.EditorForModel(new { htmlAttributes = new { @readonly="readonly" }})
+    <input type="submit" value="Сгенерировать монстра" class="mt-2" />   
+}
