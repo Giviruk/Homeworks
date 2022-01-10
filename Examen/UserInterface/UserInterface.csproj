@@ -8,8 +8,4 @@
       <_ContentIncludedByDefault Remove="Views\ScanPage\ScanPage.cshtml" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Pages" />
-    </ItemGroup>
-
 </Project>
